@@ -1,0 +1,85 @@
+{% include "header.html" %} 
+
+<!-- Page Header -->
+<div class="container text-center">
+    <h1 id="welcometext">Welcome To</h1>
+    <h1 id="tvb">Tanzim's Virtual Bookshelf!</h1>
+    <p class="subheading">Explore My Entire Book Collection</p>
+</div>
+
+<div class="container" id="cardContainer">
+    <div class="row justify-content-center">
+        {% for book in books %}
+        <div class="col-lg-3 col-md-5 col-sm-1">
+            <div class="card">
+                {% if book.img_url %}
+                <div class="front" style="background-image: url('{{book.img_url}}');"></div>
+                {% else %}
+                <div>
+                    <p class="front large">Null</p>
+                </div>
+                {% endif %}
+                <div class="back">
+                    <div>
+                        <div class="title">
+                            <p>Title: {{book.title}}</p>
+                        </div>
+                        <div class="author">
+                            <p>Author: {{book.author_name}}</p>
+                        </div>
+                        <div class="genre">
+                            <p>Genre: {{book.genre}}</p>
+                        </div>
+                        <div class="language">
+                            <p>Language: {{book.language}}</p>
+                        </div>
+                        <div class="page">
+                            <p>Pages: {{book.page_num}}</p>
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <a id="review-btn" class="button" href="{{ url_for('book_review', id=book.id) }}">Read Review</a>
+                        </div>
+                        {% if current_user.is_authenticated %}
+                        <div class="text-center">
+                            <a id="update-btn" class="button" href="{{ url_for('update_book_info', id=book.id) }}">Update</a>
+                            <a id="delete-btn" class="button delete-button" href="{{ url_for('delete', id=book.id) }}">Delete</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+
+<script>
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            // Get the search query from the input field
+            var query = $('#searchInput').val();
+
+            // Perform AJAX request to Flask endpoint
+            $.ajax({
+                url: '/search', // Send the request to the /search endpoint
+                type: 'GET', // Use the GET method
+                data: {query: query},
+                success: function (response) {
+                    // Redirect to the search results page
+                    window.location.href = '/search?query=' + encodeURIComponent(query);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+
+<!-- Footer -->
+{% include "footer.html" %}
+
+</body>
+

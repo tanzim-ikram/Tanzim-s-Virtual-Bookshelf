@@ -1,0 +1,79 @@
+{% include "header.html" %}
+    <!-- Search results container -->
+    <div id="searchResults" class="container">
+        <h2 id="search-heading">Search Results for "{{ query }}"</h2>
+        <div class="row justify-content-center">
+            {% for book in books %}
+            <div class="col-lg-3 col-md-5 col-sm-1">
+                <div class="card">
+                    {% if book.img_url %}
+                    <div class="front" style="background-image: url('{{book.img_url}}');"></div>
+                    {% else %}
+                    <div>
+                        <p class="front large">Null</p>
+                    </div>
+                    {% endif %}
+                    <div class="back">
+                        <div>
+                            <div class="title">
+                                <p>Title: {{book.title}}</p>
+                            </div>
+                            <div class="author">
+                                <p>Author: {{book.author_name}}</p>
+                            </div>
+                            <div class="genre">
+                                <p>Genre: {{book.genre}}</p>
+                            </div>
+                            <div class="language">
+                                <p>Language: {{book.language}}</p>
+                            </div>
+                            <div class="page">
+                                <p>Pages: {{book.page_num}}</p>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <a id="review-btn" class="button" href="{{ url_for('book_review', id=book.id) }}">Read Review</a>
+                            </div>
+                            {% if current_user.is_authenticated %}
+                            <div class="text-center">
+                                <a id="update-btn" class="button" href="#">Update</a>
+                                <a id="delete-btn" class="button delete-button" href="#">Delete</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#searchButton').click(function () {
+                // Get the search query from the input field
+                var query = $('#searchInput').val();
+    
+                // Perform AJAX request to Flask endpoint
+                $.ajax({
+                    url: '/search', // Send the request to the /search endpoint
+                    type: 'GET', // Use the GET method
+                    data: {query: query},
+                    success: function (response) {
+                        // Redirect to the search results page
+                        window.location.href = '/search?query=' + encodeURIComponent(query);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    {% include "footer.html" %}
+
+</body>
+
+</html>

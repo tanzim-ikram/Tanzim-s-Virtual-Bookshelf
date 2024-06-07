@@ -1,0 +1,137 @@
+{% include "dashboard_header.html" %}
+
+    <!-- Sidebar -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar Options -->
+            {% include "sidebar.html" %}
+
+            <!-- Main content -->
+            <main role="main" id="main-container" class="col-md-6 ml-sm-auto col-lg-8">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <br><br><br>
+                        <h2 id="add-book-heading">Update Book Info</h2>
+                        <div class="form-container">
+                            <form id="updateBookForm" method="post" novalidate>
+                                <!-- Include CSRF token -->
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <!-- Title -->
+                                <div class="form-group">
+                                    <label class="bold-label" for="title">Title <span id="mendatory">*</span></label>
+                                    <input type="text" class="form-control" id="title" name="title" value="{% if book %}{{ book.title }}{% endif %}">
+                                </div>
+                                <!-- Check if book exists before accessing its attributes -->
+                                {% if book %}
+                                <div class="form-group">
+                                    <label class="bold-label" for="author_name">Author Name <span
+                                            id="mendatory">*</span></label>
+                                    <input type="text" class="form-control" id="author_name" name="author_name"
+                                        value="{{ book.author_name }}">
+                                </div>
+                                {% endif %}
+                                <!-- Genre -->
+                                <div class="form-group">
+                                    <label class="bold-label">Genre</label><br>
+                                    {% for genre in unique_genres %}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="{{ genre }}" name="genre"
+                                            value="{{ genre }}">
+                                        <label class="form-check-label" for="{{ genre }}">{{ genre }}</label>
+                                    </div>
+                                    {% endfor %}
+                                    <!-- Add more genre checkboxes as needed -->
+                                </div>
+                                <!-- Language -->
+                                <div class="form-group">
+                                    <label class="bold-label" for="language">Language</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="bangla" name="language"
+                                            value="Bangla" required>
+                                        <label class="form-check-label" for="bangla">Bangla</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="english" name="language"
+                                            value="English" required>
+                                        <label class="form-check-label" for="english">English</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="other_language" name="language"
+                                            value="Other" required>
+                                        <label class="form-check-label" for="other_language">Other</label>
+                                    </div>
+                                    <!-- Add more language radio inputs as needed -->
+                                </div>
+                                <!-- Page Number -->
+                                <div class="form-group">
+                                    <label class="bold-label" for="page_num">Page Number <span
+                                            id="mendatory">*</span></label>
+                                    <input type="number" class="form-control" id="page_num" name="page_num"
+                                        value="{{ book.page_num }}" required>
+                                </div>
+                                <!-- Read/ Unread -->
+                                <div class="form-group">
+                                    <label class="bold-label" for="read_unread">Read/ Unread?</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="read" name="read_unread"
+                                            value="Yes" required>
+                                        <label class="form-check-label" for="read">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="unread" name="read_unread"
+                                            value="No" required>
+                                        <label class="form-check-label" for="unread">No</label>
+                                    </div>
+                                </div>
+                                <!-- Review -->
+                                <div class="form-group">
+                                    <label class="bold-label" for="review">Review</label>
+                                    <textarea class="form-control" id="review" name="review">{{ book.review }}</textarea>
+                                </div>
+                                <!-- Image URL -->
+                                <div class="form-group">
+                                    <label class="bold-label" for="img_url">Image URL</label>
+                                    <input type="text" class="form-control" id="img_url" name="img_url"
+                                        value="{{ book.img_url }}">
+                                </div>
+                                <br>
+                                <!-- Form Submit Button -->
+                                <button type="submit" class="btn btn-update">Update</button>
+                                <button type="button" id="delete-button" class="btn"><a id="cancel-btn"
+                                        href="{{ url_for('dashboard')}}">Cancel</a></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("updateBookForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            // Fetch POST request to update_book_info route
+            fetch("/update_book_info?id={{ book.id }}", {  // Include the book ID in the URL
+                method: "POST",
+                body: new FormData(this) // Send form data
+            })
+            .then(response => response.json()) // Parse response as JSON
+            .then(data => {
+                if (data.status === "success") {
+                    alert(data.message); // Show success message
+                    window.location.href = "/"; // Redirect to home page
+                } else {
+                    alert(data.message); // Show error message
+                }
+            })
+            .catch(error => console.error("Error:", error)); // Log any errors
+        });
+    </script>
+
+    <!-- Footer -->
+    {% include "footer.html" %}
+
+</body>
+
+</html>

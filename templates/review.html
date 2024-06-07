@@ -1,0 +1,33 @@
+{% include "header.html" %} 
+
+    <div class="container">
+        <div class="book-review">
+            <div class="book-image">
+                <img src="{{ book.img_url }}" alt="Book Cover">
+                <div class="book-details">
+                    <p><strong>Genres: </strong> {{ book.genre }}</p>
+                    <p><strong>Page Number: </strong> {% if book.page_num %} {{ book.page_num }} {% else %} N/A {% endif %}</p>
+                    <p><strong>Language: </strong> {{ book.language }}</p>
+                </div>
+            </div>
+            <div class="book-content">
+                <h3 style="font-weight: 700;">{{ book.title}} by <em>{{ book.author_name }}</em></h3>
+                {% if book.review %}
+                    <p>
+                        {{ book.review }}
+                    </p>
+                {% else %}
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {% include "footer.html" %}
+
+</body>
+
+</html>

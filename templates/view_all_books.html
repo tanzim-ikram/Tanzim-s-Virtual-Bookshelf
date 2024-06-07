@@ -1,0 +1,50 @@
+{% include "dashboard_header.html" %}
+
+    <!-- Sidebar -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar Options -->
+            {% include "sidebar.html" %}
+
+            <!-- Main Content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div id="container-table" class="container mt-5">
+                    <h2 id="all-books-heading" class="mb-4">All Books</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="large-th">Title</th>
+                                <th class="large-th">Author</th>
+                                <th class="large-th">Genre</th>
+                                <th class="small-th">Language</th>
+                                <th class="small-th">Pages</th>
+                                <th class="medium-th">Read/Unread</th>
+                                <th class="medium-th">Review</th>
+                                <!-- Add more headers as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for book in books %}
+                            <tr class="table-row">
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.author_name }}</td>
+                                <td>{{ book.genre }}</td>
+                                <td>{{ book.language }}</td>
+                                <td>{{ book.page_num }}</td>
+                                <td>{{ book.read_unread }}</td>
+                                <td><a href="{{ url_for('book_review', id=book.id) }}">Read Review</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {% include "footer.html" %}
+
+</body>
+</html>

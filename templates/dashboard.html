@@ -1,0 +1,80 @@
+{% include "dashboard_header.html" %}
+
+    <!-- Sidebar -->
+    <div class="container-fluid">
+        <div class="row">
+            
+            <!-- Sidebar Options -->
+            {% include "sidebar.html" %}
+
+            <!-- Main Content -->
+
+            <!-- Main Content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="row" id="card-row">
+                    <!-- Cards -->
+                    <!-- Total Number of Books Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Number of Books</h5>
+                                <p class="card-text">{{ books|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Number of Authors Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Number of Authors</h5>
+                                <p class="card-text">{{ books|map(attribute='author_name')|unique|list|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Number of Categories Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Categories</h5>
+                                <p class="card-text">{{ books|map(attribute='genre')|unique|list|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Number of Languages Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Languages</h5>
+                                <p class="card-text">{{ books|map(attribute='language')|unique|list|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Number of Read Books Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Read Books</h5>
+                                <p class="card-text">{{ books|selectattr('read_unread', 'equalto', 'Yes')|list|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total Number of Unread Books Card -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Unread Books</h5>
+                                <p class="card-text">{{ books|selectattr('read_unread', 'equalto', 'No')|list|length }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {% include "footer.html" %}
+
+</body>
+
+</html>

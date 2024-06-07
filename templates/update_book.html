@@ -1,0 +1,57 @@
+{% include "dashboard_header.html" %}
+
+    <!-- Sidebar -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar Options -->
+            {% include "sidebar.html" %}
+
+            <!-- Main Content -->
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div id="container-table" class="container mt-5">
+                    <h2 id="all-books-heading" class="mb-4">Update Books</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="large-heading">Title</th>
+                                <th class="medium-heading">Author</th>
+                                <th class="medium-heading">Genre</th>
+                                <th class="small-heading">Language</th>
+                                <th class="small-heading">Pages</th>
+                                <th class="medium-heading">Read/Unread</th>
+                                <th class="small-heading">Review</th>
+                                <th class="small-heading">Actions</th>
+                                <!-- Add more headers as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for book in books %}
+                            <tr>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.author_name }}</td>
+                                <td>{{ book.genre }}</td>
+                                <td>{{ book.language }}</td>
+                                <td>{{ book.page_num }}</td>
+                                <td>{{ book.read_unread }}</td>
+                                <td><a href="#">Read Review</a></td>
+                                <td>
+                                    <a id="update-btn" class="button" href="{{ url_for('update_book_info', id=book.id) }}">Update</a>
+                                    <br>
+                                    <a id="delete-btn" class="button delete-button" href="{{ url_for('delete_book', id=book.id) }}">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    {% include "footer.html" %}
+
+</body>
+</html>

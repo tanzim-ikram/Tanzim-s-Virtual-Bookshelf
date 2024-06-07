@@ -1,0 +1,24 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('dashboard')}}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('add_book')}}">Add New Book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('view_all_books')}}">View All Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('update_book')}}">Update Book Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Change Password</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout')}}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
