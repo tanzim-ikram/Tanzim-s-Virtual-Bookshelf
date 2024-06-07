@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- GOOGLE Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&family=Ubuntu:wght@400;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS Stylesheets-->
+  <link href="static/css/styles.css" rel="stylesheet" />
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div id="login-card" class="card">
+          <div class="card-header">
+            <h3>Admin Login</h3>
+          </div>
+          <div class="card-body">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p id="error-message">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <form id="login-form" method="post" action="{{ url_for('login') }}">
+              <div class="form-group">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label for="username" id="username-lbl">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username"
+                  required="required">
+              </div>
+              <div class="form-group">
+                <label for="password" id="password-lbl">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password"
+                  required="required">
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember Me</label>
+              </div>
+              <br>
+              <div class="login-button">
+                <button type="submit" id="login-btn" class="btn btn-outline-success mt-3">Login</button>
+              </div>
+              <br>
+            </form>
+          </div>
+        </div>
+        <span id="link-to-home"><a href="{{ url_for('home')}}">Return Home</a></span>
+      </div>
+    </div>
+    <br>
+    <span class="copyright text-muted">Copyright &copy; Tanzim Ikram Sheikh 2024</span>
+  </div>
+
+
+  <!-- Bootstrap JS Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
