@@ -335,7 +335,7 @@ div.form-check {
 .about-image {
   flex: 1;
   max-width: 300px;
-  margin: 0 60px 100px;
+  margin: 60px;
   text-align: center;
 }
 
@@ -370,7 +370,7 @@ div.form-check {
   margin-bottom: 15px;
 }
 
-.about-me, .about-tvb {
+.about-me {
   margin-bottom: 30px;
 }
 
@@ -378,37 +378,6 @@ div.form-check {
   text-align: justify;
   font-size: 1.1em;
   line-height: 1.6;
-}
-
-/* Quote */
-blockquote p {
-  padding: 15px;
-  background: #eee;
-  border-radius: 5px;
-}
-
-blockquote p::before {
-  content: '\201C';
-}
-
-blockquote p::after {
-  content: '\201D';
-}
-
-.translate-button {
-  float: right; /* Align the button to the right side */
-  padding: 10px 20px; /* Add some padding for a nicer look */
-  background-color: #4aab4c; /* Blue background color */
-  color: white; /* White text color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 16px; /* Increase font size */
-  cursor: pointer; /* Pointer cursor on hover */
-  margin-top: 10px; /* Space above the button */
-}
-
-.translate-button:hover {
-  background-color: #83c16a; /* Darker blue on hover */
 }
 
 /* Review Page */
@@ -480,23 +449,6 @@ blockquote p::after {
 }
 
 @media (max-width: 768px) {
-  .about-image {
-    flex: 1;
-    max-width: 300px;
-    margin: 80px 20px 20px;
-    text-align: center;
-  }
-
-  .about-section {
-    padding: 0 20px ;
-  }
-
-  .about-image img {
-    width: 80%;
-    height: auto;
-    border-radius: 50%;
-  }
-
   .book-review {
     padding: 15px;
   }
@@ -516,23 +468,6 @@ blockquote p::after {
 }
 
 @media (max-width: 576px) {
-  .about-image {
-    flex: 1;
-    max-width: 300px;
-    margin: 60px 40px 20px;
-    text-align: center;
-  }
-
-  .about-section {
-    padding: 0 10px ;
-  }
-
-  .about-image img {
-    width: 60%;
-    height: auto;
-    border-radius: 50%;
-  }
-
   .book-review {
     padding: 10px;
   }

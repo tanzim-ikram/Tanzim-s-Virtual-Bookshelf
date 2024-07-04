@@ -344,31 +344,6 @@ def delete_book():
     return redirect(url_for("update_book"))
 
 
-@app.route("/change_password", methods=["GET", "POST"])
-@login_required
-def change_password():
-    current_username = current_user.username
-    user = User.query.filter_by(username=current_username).first()
-    if request.method == "POST":
-        new_password = request.form.get("new_password")
-        retype_password = request.form.get("retype_password")
-
-        if not new_password or not retype_password:
-            return jsonify({"status": "error", "message": "Please fill in all mandatory fields"})
-        elif len(new_password) < 8:
-            return jsonify({"status": "error", "message": "Password should be 8 characters long"})
-        elif new_password != retype_password:
-            return jsonify({"status": "error", "message": "Passwords don't match. Try again!"})
-        else:
-            user = User.query.filter_by(username=current_username).first()
-            user.password = new_password
-            db.session.commit()
-            return jsonify({"status": "success", "message": "Password updated successfully!"})
-
-    return render_template("change_password.html", user=user, username=current_username,
-                           logged_in=current_user.is_authenticated)
-
-
 @app.route('/logout')
 def logout():
     logout_user()
