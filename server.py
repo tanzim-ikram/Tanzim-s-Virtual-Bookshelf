@@ -10,7 +10,7 @@ csrf = CSRFProtect(app)
 
 # Database Created
 app.config['SECRET_KEY'] = os.environ.get('MY_SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///books.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MY_DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -351,4 +351,4 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0')
