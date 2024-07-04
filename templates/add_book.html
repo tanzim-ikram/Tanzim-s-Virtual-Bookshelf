@@ -21,16 +21,16 @@
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <!-- Title -->
                                 <div class="form-group">
-                                    <label class="bold-label" for="title">Title <span id="mendatory">*</span></label>
+                                    <label class="bold-label" for="title">Title <span class="mandatory">*</span></label>
                                     <input type="text" class="form-control" id="title" name="title" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="bold-label" for="author_name">Author Name <span id="mendatory">*</span></label>
+                                    <label class="bold-label" for="author_name">Author Name <span class="mandatory">*</span></label>
                                     <input type="text" class="form-control" id="author_name" name="author_name" required>
                                 </div>
                                 <!-- Genre -->
                                 <div class="form-group">
-                                    <label class="bold-label">Genre <span id="mendatory">*</span></label><br>
+                                    <label class="bold-label">Genre <span class="mandatory">*</span></label><br>
                                     {% for genre in unique_genres %}
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="{{ genre }}" name="genre" value="{{ genre }}">
@@ -47,7 +47,7 @@
                                 </div>
                                 <!-- Language -->
                                 <div class="form-group">
-                                    <label class="bold-label" for="language">Language <span id="mendatory">*</span></label><br>
+                                    <label class="bold-label" id="language">Language <span class="mandatory">*</span></label><br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="bangla" name="language" value="Bangla"
                                             required>
@@ -67,12 +67,12 @@
                                 </div>
                                 <!-- Page Number -->
                                 <div class="form-group">
-                                    <label class="bold-label" for="page_num">Page Number <span id="mendatory">*</span></label>
+                                    <label class="bold-label" for="page_num">Page Number <span class="mandatory">*</span></label>
                                     <input type="number" class="form-control" id="page_num" name="page_num" required>
                                 </div>
                                 <!-- Read/ Unread -->
                                 <div class="form-group">
-                                    <label class="bold-label" for="read_unread">Read/ Unread? <span id="mendatory">*</span></label><br>
+                                    <label class="bold-label" id="read_unread">Read/ Unread? <span class="mandatory">*</span></label><br>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="read" name="read_unread" value="Yes"
                                             required>
